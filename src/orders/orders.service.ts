@@ -7,6 +7,9 @@ import { CreateOrderDto } from './dto/create-order.dto';
 
 @Injectable()
 export class OrdersService {
+  delete(id: number): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Order)
     private readonly ordersRepository: Repository<Order>,

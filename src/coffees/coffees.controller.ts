@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   UseGuards,
+  Delete
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { Coffee } from './coffees.entity';
@@ -24,7 +25,8 @@ export class CoffeesController {
   findAll(): Promise<Coffee[]> {
     return this.coffeesService.findAll();
   }
-
+  
+  
   @Get(':id')
   findOne(@Param('id') id: number): Promise<Coffee> {
     return this.coffeesService.findOne(id);
@@ -45,5 +47,12 @@ export class CoffeesController {
     @Body() updateQuantityDto: UpdateQuantityDto,
   ): Promise<Coffee> {
     return this.coffeesService.updateQuantity(id, updateQuantityDto.quantity);
+  }
+  
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.coffeesService.remove(id);
   }
 }

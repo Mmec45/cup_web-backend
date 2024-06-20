@@ -12,6 +12,16 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async createAdmin(username: string, password: string) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const adminUser: Partial<User> = {
+      username,
+      password: hashedPassword,
+      role: 'admin',
+    };
+    return this.usersService.create(adminUser);
+  }
+
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findByUsername(username);
     if (user && (await bcrypt.compare(pass, user.password))) {

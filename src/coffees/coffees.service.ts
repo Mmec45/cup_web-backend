@@ -7,6 +7,9 @@ import { UpdateQuantityDto } from './dto/update-quantity.dto';
 
 @Injectable()
 export class CoffeesService {
+  remove(id: string) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Coffee)
     private readonly coffeesRepository: Repository<Coffee>,

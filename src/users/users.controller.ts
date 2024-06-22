@@ -10,8 +10,6 @@ import { Role } from '../auth/role.enum';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();

@@ -18,15 +18,12 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto);
   }
   
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
   @Get()
   findAll() {
     return this.ordersService.findAll();
   }
   
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(+id);
